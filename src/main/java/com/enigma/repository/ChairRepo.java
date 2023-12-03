@@ -45,10 +45,22 @@ public class ChairRepo {
     }
 
     public Chair getByID(Integer id){
-        return null;
+        Chair chair = null;
+        try {
+            PreparedStatement pr = conn.prepareStatement("SELECT * FROM t_seat WHERE id=?");
+            pr.setInt(1, id);
+            ResultSet result = pr.executeQuery();
+            while (result.next()){
+                id = result.getInt("id");
+                String seat_number = result.getString("seat_number");
+                Integer theater_id = result.getInt("theater_id");
+                chair = new Chair(id, seat_number, theater_id);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return chair;
     }
-
-
 
 
 }

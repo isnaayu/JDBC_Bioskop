@@ -45,6 +45,20 @@ public class CustomerRepo {
     }
 
     public Customer getByID(Integer id){
-        return null;
+        Customer customer = null;
+        try {
+            PreparedStatement pr = conn.prepareStatement("SELECT * FROM m_customer WHERE id=?");
+            pr.setInt(1, id);
+            ResultSet result = pr.executeQuery();
+            while (result.next()){
+                id = result.getInt("id");
+                String name = result.getString("name");
+                String birth_date = result.getString("birth_date");
+                customer = new Customer(id, name, birth_date);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return customer;
     }
 }

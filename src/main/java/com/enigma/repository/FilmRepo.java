@@ -35,5 +35,26 @@ public class FilmRepo {
         return data;
     }
 
+    public Film getByID(Integer id){
+        Film film = null;
+        try {
+            PreparedStatement pr = conn.prepareStatement("SELECT * FROM t_film WHERE id=?");
+            pr.setInt(1, id);
+            ResultSet result = pr.executeQuery();
+            while (result.next()){
+                id = result.getInt("id");
+                String title = result.getString("title");
+                Integer duration = result.getInt("duration");
+                String show_date = result.getString("show_date");
+                Integer price = result.getInt("price");
+                Integer rating_id = result.getInt("rating_id");
+                film = new Film(id, title, duration, show_date, price, rating_id);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return film;
+    }
+
 
 }
