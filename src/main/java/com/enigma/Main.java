@@ -17,11 +17,12 @@ public class Main {
 //        customer.setName("Yuni Pujiastuti");
 //        customer.setBirth_date("2001-01-02");
 //        customerRepo.save(customer);
-        Customer customer = new Customer();
-        customer.setName("Yuni Puji astuti");
-        customer.setBirth_date("2001-01-02");
-        customer.setId(2);
-        customerRepo.update(customer);
+//        Customer customer = new Customer();
+//        customer.setName("Yuni Puji astuti");
+//        customer.setBirth_date("2001-01-02");
+//        customer.setId(2);
+//        customerRepo.update(customer);
+//        customerRepo.delete(2);
 
 
         ChairRepo chairRepo = new ChairRepo();
@@ -31,10 +32,11 @@ public class Main {
 //        chair.setSeat_number("3A");
 //        chair.setTheater_id(1);
 //        chairRepo.save(chair);
-        chair.setSeat_number("1A");
-        chair.setTheater_id(1);
-        chair.setId(1);
-        chairRepo.update(chair);
+//        chair.setSeat_number("1A");
+//        chair.setTheater_id(1);
+//        chair.setId(1);
+//        chairRepo.update(chair);
+        chairRepo.delete(5);
 
 
 
@@ -48,13 +50,14 @@ public class Main {
 //        film.setRating_id(2);
 //        film.setShow_date("2023-12-25");
 //        filmRepo.save(film);
-        film.setId(3);
-        film.setShow_date("2023-12-25");
-        film.setRating_id(1);
-        film.setDuration(75);
-        film.setPrice(50000);
-        film.setTitle("Home Alone 2");
-        filmRepo.update(film);
+//        film.setId(3);
+//        film.setShow_date("2023-12-25");
+//        film.setRating_id(1);
+//        film.setDuration(75);
+//        film.setPrice(50000);
+//        film.setTitle("Home Alone 2");
+//        filmRepo.update(film);
+        filmRepo.delete(3);
 
         RatingRepo ratingRepo = new RatingRepo();
 //        System.out.println(ratingRepo.getAll());
@@ -63,10 +66,11 @@ public class Main {
 //        rating.setCode("K");
 //        rating.setDescription("Kartun semua umur");
 //        ratingRepo.save(rating);
-        rating.setId(6);
-        rating.setCode("K");
-        rating.setDescription("umum");
-        ratingRepo.update(rating);
+//        rating.setId(6);
+//        rating.setCode("K");
+//        rating.setDescription("umum");
+//        ratingRepo.update(rating);
+        ratingRepo.delete(5);
 
 
         TheaterRepo theaterRepo = new TheaterRepo();
@@ -78,11 +82,12 @@ public class Main {
 //        theater.setStock(10);
 //        theater.setFilm_id(3);
 //        theaterRepo.save(theater);
-        Theater theater = new Theater();
-        theater.setTheater_number("D");
-        theater.setStock(12);
-        theater.setFilm_id(3);
-        theater.setId(4);
-        theaterRepo.update(theater);
+//        Theater theater = new Theater();
+//        theater.setTheater_number("D");
+//        theater.setStock(12);
+//        theater.setFilm_id(3);
+//        theater.setId(4);
+//        theaterRepo.update(theater);
+        theaterRepo.delete(4);
     }
 }

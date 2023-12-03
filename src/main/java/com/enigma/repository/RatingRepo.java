@@ -1,6 +1,7 @@
 package com.enigma.repository;
 
 import com.enigma.configuration.DbConnector;
+import com.enigma.entity.Film;
 import com.enigma.entity.Rating;
 
 import java.sql.*;
@@ -72,6 +73,25 @@ public class RatingRepo {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public Rating delete(Integer id){
+        Rating rating = null;
+
+        try (PreparedStatement pr = conn.prepareStatement("DELETE FROM t_rating WHERE id = ?")) {
+            pr.setInt(1, id);
+            ResultSet result = pr.executeQuery();
+
+            while (result.next()) {
+                id = result.getInt("id");
+                String code = result.getString("code");
+                String description = result.getString("description");
+                rating = new Rating(id, code, description);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rating;
     }
 
 
