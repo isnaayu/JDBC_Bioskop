@@ -42,8 +42,18 @@ public class CustomerRepo {
         }
     }
 
-    public Customer update(Integer id){
-        return null;
+    public void update(Customer customer){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("UPDATE m_customer SET name=?, birth_date=? WHERE id=?");
+            pr.setString(1,customer.getName());
+            pr.setDate(2, Date.valueOf(customer.getBirth_date()));
+            pr.setInt(3, customer.getId());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public Customer delete(Integer id){

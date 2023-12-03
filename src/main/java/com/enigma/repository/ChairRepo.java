@@ -45,8 +45,19 @@ public class ChairRepo {
         }
     }
 
-    public Chair update(Integer id){
-        return null;
+    public void update(Chair chair){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("UPDATE t_seat SET seat_number=? , theater_id=? WHERE id=? ");
+            pr.setString(1, chair.getSeat_number());
+            pr.setInt(2, chair.getTheater_id());
+            pr.setInt(3, chair.getId());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public Chair delete(Integer id){

@@ -60,4 +60,20 @@ public class RatingRepo {
         }
     }
 
+    public void update(Rating rating){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("UPDATE t_rating SET code=?, description=? WHERE id=?");
+            pr.setString(1,rating.getCode());
+            pr.setString(2,rating.getDescription());
+            pr.setInt(3, rating.getId());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
 }

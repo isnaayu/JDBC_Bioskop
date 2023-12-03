@@ -65,4 +65,19 @@ public class TheaterRepo {
         }
     }
 
+    public void update(Theater theater){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("UPDATE t_theater SET theater_number=?, stock=?, film_id=? WHERE id=?");
+            pr.setString(1,theater.getTheater_number());
+            pr.setInt(2,theater.getStock());
+            pr.setInt(3, theater.getFilm_id());
+            pr.setInt(4, theater.getId());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
