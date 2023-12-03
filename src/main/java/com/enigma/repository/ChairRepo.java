@@ -33,7 +33,16 @@ public class ChairRepo {
     }
 
     public void save(Chair chair){
-
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("INSERT INTO t_seat (seat_number, theater_id) VALUES (?,?)");
+            pr.setString(1,chair.getSeat_number());
+            pr.setInt(2,chair.getTheater_id());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public Chair update(Integer id){

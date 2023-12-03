@@ -3,10 +3,7 @@ package com.enigma.repository;
 import com.enigma.configuration.DbConnector;
 import com.enigma.entity.Rating;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +46,18 @@ public class RatingRepo {
         }
         return rating;
     }
+
+    public void save(Rating rating){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("INSERT INTO t_rating(code, description) VALUES (?,?)");
+            pr.setString(1,rating.getCode());
+            pr.setString(2,rating.getDescription());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

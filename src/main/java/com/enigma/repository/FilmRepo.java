@@ -3,10 +3,7 @@ package com.enigma.repository;
 import com.enigma.configuration.DbConnector;
 import com.enigma.entity.Film;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +32,22 @@ public class FilmRepo {
         return data;
     }
 
+    public void save(Film film){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("INSERT INTO t_film (title, duration, show_date, price, rating_id) VALUES (?,?,?,?,?)");
+            pr.setString(1,film.getTitle());
+            pr.setInt(2,film.getDuration());
+            pr.setDate(3, Date.valueOf(film.getShow_date()));
+            pr.setInt(4,film.getPrice());
+            pr.setInt(5,film.getRating_id());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public Film getByID(Integer id){
         Film film = null;
         try {
@@ -55,6 +68,7 @@ public class FilmRepo {
         }
         return film;
     }
+
 
 
 }

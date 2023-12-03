@@ -3,10 +3,7 @@ package com.enigma.repository;
 import com.enigma.configuration.DbConnector;
 import com.enigma.entity.Customer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,16 @@ public class CustomerRepo {
     }
 
     public void save(Customer customer){
-
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("INSERT INTO m_customer (name, birth_date) VALUES (?,?)");
+            pr.setString(1,customer.getName());
+            pr.setDate(2, Date.valueOf(customer.getBirth_date()));
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public Customer update(Integer id){

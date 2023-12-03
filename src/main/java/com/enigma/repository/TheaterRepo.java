@@ -5,10 +5,7 @@ import com.enigma.entity.Chair;
 import com.enigma.entity.Customer;
 import com.enigma.entity.Theater;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +49,20 @@ public class TheaterRepo {
             System.out.println(e.getMessage());
         }
         return theater;
+    }
+
+    public void save(Theater theater){
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement pr = conn.prepareStatement("INSERT INTO t_theater (theater_number, stock, film_id) VALUES (?,?,?)");
+            pr.setString(1,theater.getTheater_number());
+            pr.setInt(2,theater.getStock());
+            pr.setInt(3, theater.getFilm_id());
+            pr.executeUpdate();
+            conn.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }
